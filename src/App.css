@@ -1,3 +1,56 @@
+body {
+  font-family: "nanumsquare";
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #282c34;
+  color: white;
+  width: 100%;
+  padding: 25px;
+  display: flex;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 550;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 550;
+  margin: 50px;
+}
+
+/* Post List */
+.post {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 7px;
+  margin: auto;
+  width: 80%;
+  max-width: 700px;
+}
+
+.post__title {
+  font-size: 20px;
+  font-weight: 550;
+  color: #282c34;
+  text-align: left;
+}
+
+.post__meta {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+}
+
+.created {
+  color: #bdbdbd;
+}
+
+/* App */
 .App {
   text-align: center;
 }

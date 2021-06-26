@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// eslint-disable
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  let title = "리액트 블로그 만들기";
+  let created = "Jun. 26, 2021";
+  let [likes, setLikes] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <div className="logo">Velog</div>
       </header>
+      <div className="title">All</div>
+      <div className="list-container">
+        <div className="post">
+          <div className="post__title">{title}</div>
+          <div className="post__meta">
+            <div className="created">Created at {created}</div>
+            <div className="likes">
+              <span>❤</span> {likes}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
