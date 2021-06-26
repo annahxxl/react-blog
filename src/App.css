@@ -33,6 +33,7 @@ header {
   margin: auto;
   width: 80%;
   max-width: 700px;
+  margin-bottom: 10px;
 }
 
 .post__title {
