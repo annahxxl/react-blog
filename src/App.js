@@ -7,6 +7,10 @@ function App() {
   let created = "Jun. 26, 2021";
   let [likes, setLikes] = useState(0);
 
+  function increaseLikes() {
+    setLikes(likes + 1);
+  }
+
   return (
     <div className="App">
       <header>
@@ -19,7 +23,7 @@ function App() {
           <div className="post__meta">
             <div className="created">Created at {created}</div>
             <div className="likes">
-              <span>❤</span> {likes}
+              <span onClick={increaseLikes}>❤</span> {likes}
             </div>
           </div>
         </div>
