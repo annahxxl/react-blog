@@ -94,7 +94,7 @@ header {
 }
 
 .modal__content {
-  padding: 20px;
+  padding: 20px 20px 60px;
 }
 
 /* status */
@@ -102,10 +102,6 @@ header {
 .post__title:hover,
 .modal__btn--close:hover {
   cursor: pointer;
-}
-
-.hidden {
-  display: none;
 }
 
 /* App */
