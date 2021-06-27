@@ -172,7 +172,7 @@ textarea {
 .modal__btn--close:hover,
 .write-btn:hover,
 .upload-btn:hover,
-.back-btn {
+.back-btn:hover {
   cursor: pointer;
 }
 
@@ -188,6 +188,11 @@ textarea:focus {
 
 .back-btn:hover {
   color: #ff5544;
+}
+
+.upload-btn:hover {
+  background-color: #ff5544;
+  color: white;
 }
 
 /* App */

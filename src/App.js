@@ -10,6 +10,11 @@ function App() {
   let [modalStatus, setModalStatus] = useState(false);
   let [postIdx, setPostIdx] = useState(0);
 
+  // 게시글 input value
+  let [title, setTitle] = useState("");
+  let [content, setContent] = useState("");
+  let [newPost, setNewPost] = useState({});
+
   return (
     <div className="App">
       <header>
@@ -47,7 +52,16 @@ function App() {
           </div>
         </Route>
         <Route path="/write">
-          <Write></Write>
+          <Write
+            title={title}
+            content={content}
+            posts={posts}
+            newPost={newPost}
+            setTitle={setTitle}
+            setContent={setContent}
+            setNewPost={setNewPost}
+            setPosts={setPosts}
+          ></Write>
         </Route>
       </Switch>
     </div>
