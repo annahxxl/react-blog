@@ -1,10 +1,10 @@
 // eslint-disable
-import { useState } from "react";
 import "./App.css";
-import { posts } from "./data";
+import { useState } from "react";
+import { data } from "./data";
 
 function App() {
-  let [likes, setLikes] = useState(posts.map((post) => post.likes));
+  let [posts, setPosts] = useState(data);
   let [modalStatus, setModalStatus] = useState(false);
   let [postIdx, setPostIdx] = useState(0);
 
@@ -13,20 +13,19 @@ function App() {
       <header>
         <div className="logo">Velog</div>
       </header>
-
-      <div className="title">All</div>
-
+      <div className="category">All</div>
       <div className="list-container">
         {posts.map((post, index) => {
           return (
-            <Posts
-              postIdx={index}
+            <Post
+              key={index}
+              post={post}
               posts={posts}
-              likes={likes}
-              setLikes={setLikes}
-              setModalStatus={setModalStatus}
+              postIdx={index}
+              setPosts={setPosts}
               setPostIdx={setPostIdx}
-            ></Posts>
+              setModalStatus={setModalStatus}
+            ></Post>
           );
         })}
       </div>
@@ -41,7 +40,7 @@ function App() {
   );
 }
 
-function Posts(props) {
+function Post(props) {
   return (
     <div className="post">
       <div
@@ -51,23 +50,21 @@ function Posts(props) {
           props.setModalStatus(true);
         }}
       >
-        {props.posts[props.postIdx].title}
+        {props.post.title}
       </div>
       <div className="post__meta">
-        <div className="created">
-          Created at {props.posts[props.postIdx].created}
-        </div>
+        <div className="created">Created at {props.post.created}</div>
         <div className="likes">
           <span
             onClick={() => {
-              let newLikes = [...props.likes];
-              newLikes[props.postIdx] += 1;
-              props.setLikes(newLikes);
+              let newPosts = [...props.posts];
+              newPosts[props.postIdx].likes += 1;
+              props.setPosts(newPosts);
             }}
           >
-            ❤
+            ❤&nbsp;
           </span>
-          {props.likes[props.postIdx]}
+          {props.post.likes}
         </div>
       </div>
     </div>
@@ -76,7 +73,7 @@ function Posts(props) {
 
 function Modal(props) {
   return (
-    <div className="modal-container hidden">
+    <div className="modal-container">
       <div className="modal">
         <div
           className="modal__btn--close"

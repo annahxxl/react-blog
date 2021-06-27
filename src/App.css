@@ -12,6 +12,7 @@ header {
   width: 100%;
   padding: 25px;
   display: flex;
+  justify-content: space-between;
 }
 
 .logo {
@@ -19,7 +20,7 @@ header {
   font-weight: 550;
 }
 
-.title {
+.category {
   font-size: 20px;
   font-weight: 550;
   margin: 50px;
