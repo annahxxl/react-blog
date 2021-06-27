@@ -1,7 +1,9 @@
 // eslint-disable
 import "./App.css";
 import { useState } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 import { data } from "./data";
+import Write from "./Write";
 
 function App() {
   let [posts, setPosts] = useState(data);
@@ -11,31 +13,43 @@ function App() {
   return (
     <div className="App">
       <header>
-        <div className="logo">Velog</div>
+        <Link to="/" className="logo">
+          Velog
+        </Link>
+        <Link to="/write" className="write-btn">
+          Write
+        </Link>
       </header>
-      <div className="category">All</div>
-      <div className="list-container">
-        {posts.map((post, index) => {
-          return (
-            <Post
-              key={index}
-              post={post}
-              posts={posts}
-              postIdx={index}
-              setPosts={setPosts}
-              setPostIdx={setPostIdx}
-              setModalStatus={setModalStatus}
-            ></Post>
-          );
-        })}
-      </div>
-      {modalStatus ? (
-        <Modal
-          posts={posts}
-          postIdx={postIdx}
-          setModalStatus={setModalStatus}
-        ></Modal>
-      ) : null}
+      <Switch>
+        <Route exact path="/">
+          <div className="category">All</div>
+          <div className="list-container">
+            {posts.map((post, index) => {
+              return (
+                <Post
+                  key={index}
+                  post={post}
+                  posts={posts}
+                  postIdx={index}
+                  setPosts={setPosts}
+                  setPostIdx={setPostIdx}
+                  setModalStatus={setModalStatus}
+                ></Post>
+              );
+            })}
+            {modalStatus ? (
+              <Modal
+                posts={posts}
+                postIdx={postIdx}
+                setModalStatus={setModalStatus}
+              ></Modal>
+            ) : null}
+          </div>
+        </Route>
+        <Route path="/write">
+          <Write></Write>
+        </Route>
+      </Switch>
     </div>
   );
 }
