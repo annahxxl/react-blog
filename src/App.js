@@ -55,13 +55,13 @@ function App() {
                 ></Post>
               );
             })}
-            {modalState ? (
+            {modalState && (
               <Modal
                 posts={posts}
                 postIdx={postIdx}
                 setModalState={setModalState}
               ></Modal>
-            ) : null}
+            )}
           </div>
         </Route>
         <Route path="/write">
