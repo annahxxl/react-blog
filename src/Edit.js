@@ -1,23 +1,30 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-function Write(props) {
+function Edit(props) {
+  let { id } = useParams();
+  let post = props.posts.find((post) => post.id === parseInt(id));
   let history = useHistory();
+
+  if (!post) {
+    history.push("/");
+  }
 
   return (
     <div>
-      <div className="category">Write</div>
+      <div className="category">Edit</div>
       <div className="input">
         <input
           className="input__title"
-          placeholder="제목을 입력하세요"
-          onChange={(e) => {
-            props.setTitle(e.target.value);
+          value={post.title}
+          onChange={() => {
+            // 수정된 값 set 해주기
           }}
         />
         <textarea
           className="input__content"
-          onChange={(e) => {
-            props.setContent(e.target.value);
+          value={post.content}
+          onChange={() => {
+            // 수정된 값 set 해주기
           }}
         />
       </div>
@@ -37,22 +44,15 @@ function Write(props) {
               alert("내용을 입력해 주세요");
               return;
             }
-            const today = new Date().toDateString().split(" ");
-            props.setNewPost({
-              id: props.id,
-              title: props.title,
-              content: props.content,
-              created: `${today[1]}. ${today[2]}, ${today[3]}`,
-              likes: 0,
-            });
+            // 수정된 값 set 해주기
             history.goBack();
           }}
         >
-          완료
+          수정
         </button>
       </div>
     </div>
   );
 }
 
-export default Write;
+export default Edit;

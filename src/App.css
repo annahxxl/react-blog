@@ -91,13 +91,23 @@ header {
   overflow: scroll;
 }
 
+.modal__btn {
+  width: 75px;
+  display: flex;
+  justify-content: space-between;
+  float: right;
+}
+
 .modal__btn--close {
-  text-align: right;
   font-weight: 600;
 }
 
+.modal__btn--edit {
+  color: black;
+}
+
 .modal__created {
-  padding-top: 50px;
+  padding-top: 70px;
   font-size: 14px;
 }
 
@@ -170,6 +180,7 @@ textarea {
 .likes span:hover,
 .post__title:hover,
 .modal__btn--close:hover,
+.modal__btn--edit:hover,
 .write-btn:hover,
 .upload-btn:hover,
 .back-btn:hover {

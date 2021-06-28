@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { data } from "./data";
 import Write from "./Write";
+import Edit from "./Edit";
 
 function App() {
   let [posts, setPosts] = useState(data);
@@ -11,6 +12,7 @@ function App() {
   let [postIdx, setPostIdx] = useState(0);
 
   // 게시글 input value
+  let [id, setId] = useState(10004);
   let [title, setTitle] = useState("");
   let [content, setContent] = useState("");
   let [newPost, setNewPost] = useState(null);
@@ -19,9 +21,11 @@ function App() {
     if (!newPost) return;
     let newPosts = [...posts];
     newPosts.unshift(newPost);
+    console.log(newPost);
     setPosts(newPosts);
     setTitle("");
     setContent("");
+    setId(id + 1);
   }, [newPost]);
 
   return (
@@ -62,13 +66,23 @@ function App() {
         </Route>
         <Route path="/write">
           <Write
+            id={id}
             title={title}
             setTitle={setTitle}
             content={content}
             setContent={setContent}
-            newPost={newPost}
             setNewPost={setNewPost}
           ></Write>
+        </Route>
+        <Route path="/edit/:id">
+          <Edit
+            posts={posts}
+            title={title}
+            setTitle={setTitle}
+            content={content}
+            setContent={setContent}
+            setNewPost={setNewPost}
+          ></Edit>
         </Route>
       </Switch>
     </div>
@@ -110,13 +124,21 @@ function Modal(props) {
   return (
     <div className="modal-container">
       <div className="modal">
-        <div
-          className="modal__btn--close"
-          onClick={() => {
-            props.setModalState(false);
-          }}
-        >
-          닫기
+        <div className="modal__btn">
+          <Link
+            to={"/edit/" + props.posts[props.postIdx].id}
+            className="modal__btn--edit"
+          >
+            수정
+          </Link>
+          <div
+            className="modal__btn--close"
+            onClick={() => {
+              props.setModalState(false);
+            }}
+          >
+            닫기
+          </div>
         </div>
         <div className="modal__created">
           {props.posts[props.postIdx].created}
