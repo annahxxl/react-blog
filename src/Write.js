@@ -10,18 +10,16 @@ function Write(props) {
         <input
           className="input__title"
           placeholder="제목을 입력하세요"
-          required
           onChange={(e) => {
             props.setTitle(e.target.value);
           }}
-        ></input>
+        />
         <textarea
           className="input__content"
-          required
           onChange={(e) => {
             props.setContent(e.target.value);
           }}
-        ></textarea>
+        />
       </div>
       <div className="btn-container">
         <button
@@ -35,6 +33,10 @@ function Write(props) {
         <button
           className="upload-btn"
           onClick={() => {
+            if (props.title === "" || props.content === "") {
+              alert("내용을 입력해 주세요");
+              return;
+            }
             const today = new Date().toDateString().split(" ");
             props.setNewPost({
               title: props.title,
@@ -42,10 +44,6 @@ function Write(props) {
               created: `${today[1]}. ${today[2]}, ${today[3]}`,
               likes: 0,
             });
-            console.log(props.newPost);
-            let newPosts = [...props.posts];
-            newPosts.unshift(props.newPost);
-            props.setPosts(newPosts);
             history.goBack();
           }}
         >

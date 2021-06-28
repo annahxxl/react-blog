@@ -1,19 +1,28 @@
 // eslint-disable
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { data } from "./data";
 import Write from "./Write";
 
 function App() {
   let [posts, setPosts] = useState(data);
-  let [modalStatus, setModalStatus] = useState(false);
+  let [modalState, setModalState] = useState(false);
   let [postIdx, setPostIdx] = useState(0);
 
   // 게시글 input value
   let [title, setTitle] = useState("");
   let [content, setContent] = useState("");
-  let [newPost, setNewPost] = useState({});
+  let [newPost, setNewPost] = useState(null);
+
+  useEffect(() => {
+    if (!newPost) return;
+    let newPosts = [...posts];
+    newPosts.unshift(newPost);
+    setPosts(newPosts);
+    setTitle("");
+    setContent("");
+  }, [newPost]);
 
   return (
     <div className="App">
@@ -35,18 +44,18 @@ function App() {
                   key={index}
                   post={post}
                   posts={posts}
-                  postIdx={index}
                   setPosts={setPosts}
+                  postIdx={index}
                   setPostIdx={setPostIdx}
-                  setModalStatus={setModalStatus}
+                  setModalState={setModalState}
                 ></Post>
               );
             })}
-            {modalStatus ? (
+            {modalState ? (
               <Modal
                 posts={posts}
                 postIdx={postIdx}
-                setModalStatus={setModalStatus}
+                setModalState={setModalState}
               ></Modal>
             ) : null}
           </div>
@@ -54,13 +63,11 @@ function App() {
         <Route path="/write">
           <Write
             title={title}
-            content={content}
-            posts={posts}
-            newPost={newPost}
             setTitle={setTitle}
+            content={content}
             setContent={setContent}
+            newPost={newPost}
             setNewPost={setNewPost}
-            setPosts={setPosts}
           ></Write>
         </Route>
       </Switch>
@@ -75,7 +82,7 @@ function Post(props) {
         className="post__title"
         onClick={() => {
           props.setPostIdx(props.postIdx);
-          props.setModalStatus(true);
+          props.setModalState(true);
         }}
       >
         {props.post.title}
@@ -106,7 +113,7 @@ function Modal(props) {
         <div
           className="modal__btn--close"
           onClick={() => {
-            props.setModalStatus(false);
+            props.setModalState(false);
           }}
         >
           닫기
